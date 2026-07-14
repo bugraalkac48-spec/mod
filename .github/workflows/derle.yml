@@ -11,19 +11,22 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     
-    - name: Java Kurulumu
+    - name: Java Kurulumu (Java 17)
       uses: actions/setup-java@v4
       with:
         distribution: 'temurin'
         java-version: '17'
 
-    - name: Uyumlu Gradle Sistemini Kur
+    - name: Temiz Gradle Kurulumu
       uses: gradle/actions/setup-gradle@v4
       with:
-        gradle-version: '7.6' # ForgeGradle 5.1 ile tamamen uyumlu çalışan sürüm
-        
+        gradle-version: '7.6'
+
+    - name: Bağımlılıkları Önceden Hazırla
+      run: gradle dependencies --no-daemon
+
     - name: Modu Derle (Build)
-      run: gradle build
+      run: gradle build --no-daemon -x test
       
     - name: Mod Dosyasını (JAR) Yayınla
       uses: actions/upload-artifact@v4
