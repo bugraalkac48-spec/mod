@@ -17,8 +17,10 @@ jobs:
         distribution: 'temurin'
         java-version: '17'
 
-    - name: Gradle Sistemini Kur
+    - name: Uyumlu Gradle Sistemini Kur
       uses: gradle/actions/setup-gradle@v4
+      with:
+        gradle-version: '8.5' # Forge ile tam uyumlu çalışan sürüm
         
     - name: Modu Derle (Build)
       run: gradle build
