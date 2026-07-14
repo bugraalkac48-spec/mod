@@ -16,12 +16,12 @@ jobs:
       with:
         distribution: 'temurin'
         java-version: '17'
+
+    - name: Gradle Sistemini Kur
+      uses: gradle/actions/setup-gradle@v4
         
-    - name: Gradle Yetkilendirme
-      run: chmod +x gradlew
-      
     - name: Modu Derle (Build)
-      run: ./gradlew build
+      run: gradle build
       
     - name: Mod Dosyasını (JAR) Yayınla
       uses: actions/upload-artifact@v4
