@@ -1,35 +1,39 @@
-plugins {
-    id 'eclipse'
-    id 'idea'
-    id 'net.minecraftforge.gradle' version '[6.0,6.2)'
+buildscript {
+    repositories {
+        maven { url = 'https://maven.minecraftforge.net/' }
+        mavenCentral()
+    }
+    dependencies {
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
+    }
 }
 
-version = '1.0.0'
+apply plugin: 'net.minecraftforge.gradle'
+
 group = 'com.filmkarakterleri'
-archivesBaseName = 'filmkarakterleri'
+version = '1.0'
+archivesBaseName = 'filmkarakterlerimod'
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
-println "Java: ${System.getProperty 'java.version'}, JVM: ${System.getProperty 'java.vm.version'} (${System.getProperty 'java.vendor'})"
-
 minecraft {
     mappings channel: 'official', version: '1.20.1'
-
+    
     runs {
         client {
             workingDirectory project.file('run')
             property 'forge.logging.markers', 'REGISTRIES'
             property 'forge.logging.console.level', 'debug'
-            mods { filmkarakterleri { source sourceSets.main } }
-        }
-        server {
-            workingDirectory project.file('run')
-            property 'forge.logging.markers', 'REGISTRIES'
-            property 'forge.logging.console.level', 'debug'
-            mods { filmkarakterleri { source sourceSets.main } }
+            mods {
+                filmkarakterlerimod {
+                    source sourceSets.main
+                }
+            }
         }
     }
 }
+
+sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 repositories {
     mavenCentral()
@@ -42,12 +46,15 @@ dependencies {
 jar {
     manifest {
         attributes([
-            "Specification-Title": "filmkarakterleri",
-            "Specification-Vendor": "filmkarakterleri",
+            "Specification-Title": "filmkarakterlerimod",
+            "Specification-Vendor": "bugra",
             "Specification-Version": "1",
             "Implementation-Title": project.name,
-            "Implementation-Version": project.jar.archiveVersion,
-            "Implementation-Vendor": "filmkarakterleri"
+            "Implementation-Version": project.version,
+            "Implementation-Vendor" :"bugra",
+            "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])
     }
 }
+
+jar.finalizedBy('reobfJar')
