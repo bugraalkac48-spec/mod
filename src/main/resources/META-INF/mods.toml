@@ -1,0 +1,28 @@
+modLoader="javafml"
+loaderVersion="[47,)"
+license="All Rights Reserved"
+issueTrackerURL="https://example.com"
+
+[[mods]]
+modId="filmkarakterleri"
+version="1.0.0"
+displayName="Film Karakterleri Modu"
+description='''
+10 komedi filmi karakterinin evcilleştirilebildiği ve chatte replik attığı bir Minecraft modu.
+Karakter görselleri ve replikleri kullanıcı tarafından eklenmelidir (telif sebebiyle boş bırakılmıştır).
+'''
+authors="Sen"
+
+[[dependencies.filmkarakterleri]]
+    modId="forge"
+    mandatory=true
+    versionRange="[47,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.filmkarakterleri]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.20.1,1.21)"
+    ordering="NONE"
+    side="BOTH"
