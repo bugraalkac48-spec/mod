@@ -20,7 +20,7 @@ jobs:
     - name: Uyumlu Gradle Sistemini Kur
       uses: gradle/actions/setup-gradle@v4
       with:
-        gradle-version: '8.5' # Forge ile tam uyumlu çalışan sürüm
+        gradle-version: '7.6' # ForgeGradle 5.1 ile tamamen uyumlu çalışan sürüm
         
     - name: Modu Derle (Build)
       run: gradle build
