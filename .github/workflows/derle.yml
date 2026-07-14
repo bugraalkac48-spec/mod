@@ -1,0 +1,30 @@
+name: Minecraft Mod Derleme
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Java Kurulumu
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'temurin'
+        java-version: '17'
+        
+    - name: Gradle Yetkilendirme
+      run: chmod +x gradlew
+      
+    - name: Modu Derle (Build)
+      run: ./gradlew build
+      
+    - name: Mod Dosyasını (JAR) Yayınla
+      uses: actions/upload-artifact@v4
+      with:
+        name: Hazir-Minecraft-Modu
+        path: build/libs/*.jar
